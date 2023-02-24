@@ -10,7 +10,7 @@ export const Register = (props) => {
     let navigate = useNavigate()
 
     const registerNewUser = () => {
-        getRegister({user})
+        getRegister(user)
             .then(createdUser => {
                 if (createdUser.hasOwnProperty("id")) {
                     localStorage.setItem("travel_user", JSON.stringify({
@@ -24,7 +24,7 @@ export const Register = (props) => {
 
     const handleRegister = (e) => {
         e.preventDefault()
-        findEmail({user})
+        findEmail(user.email)
             .then(response => {
                 if (response.length > 0) {
                     // Duplicate email. No good.
@@ -45,22 +45,20 @@ export const Register = (props) => {
 
     return (
         <main className="mb-4 font-body w-screen h-screen image"style={{ textAlign: "center" }}>
-            <form className="signIn" onSubmit={handleRegister}>
-                <h1 className="font-semibold text-xl item-center m-4 border-b-2 border-gray-700">Please Register for Thirst for Travel</h1>
+            <form className="signIn mt-48" onSubmit={handleRegister}>
+                <h1 className=" text-3xl item-center mb-4 border-b-2 border-gray-700">Please Register</h1>
                 <fieldset>
-                    <label htmlFor="fullName"> Full Name </label>
+                    <label className="mr-4" htmlFor="fullName"> Name </label>
                     <input onChange={updateUser}
-                           type="text" id="fullName" className="form-control"
-                           placeholder="Enter your name" required autoFocus />
+                           type="text" id="fullName" className="form-control" required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="email"> Email address </label>
+                    <label className="ml-4" htmlFor="email"> Email address </label>
                     <input onChange={updateUser}
-                        type="email" id="email" className="form-control"
-                        placeholder="Email address" required />
+                        type="email" id="email" className="form-control mr-4" required />
                 </fieldset>
                 <fieldset>
-                    <button className="bg-slate-200 rounded-lg underline" type="submit"> Register </button>
+                    <button className="bg-slate-200 rounded-lg underline bg-opacity-80 mb-2" type="submit"> Register </button>
                 </fieldset>
             </form>
         </main>

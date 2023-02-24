@@ -10,7 +10,7 @@ export const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault()
 
-        getLogin({ email })
+        getLogin( email )
             .then(foundUsers => {
                 if (foundUsers.length === 1) {
                     const user = foundUsers[0]
@@ -19,7 +19,7 @@ export const Login = () => {
                         staff: user.isStaff
                     }))
 
-                    navigate("/")
+                    navigate("/planning")
                 }
                 else {
                     window.alert("Invalid login")
@@ -29,27 +29,26 @@ export const Login = () => {
 
     return (
         <main className="font-body w-screen h-screen image">
-            <section className="flex justify-center mb-4">
+            <section className="flex justify-center pt-56">
                 <form className="signIn" onSubmit={handleLogin}>
                     <h2 className="signIn_h2">Please sign in</h2>
-                    <fieldset className="m-4">
+                    <fieldset className="ml-4 mr-4">
                         <label htmlFor="inputEmail"> Email address </label>
                         <input type="email"
                             value={email}
                             onChange={evt => set(evt.target.value)}
                             className="form-control"
-                            placeholder="Email address"
                             required autoFocus />
                     </fieldset>
-                    <fieldset className="m-4">
-                        <button type="submit" className="shadow-lg">
-                            Sign in and start planning today
+                    <fieldset className="">
+                        <button type="submit" className="ml-32 text-lg underline mb-2">
+                            Sign in
                         </button>
                     </fieldset>
+                    <section className="flex justify-center relative mb-2">
+                    <Link className="ml-48 underline text-sm" to="/register">Not a member yet?</Link>
+                </section>
                 </form>
-            </section>
-            <section className="flex justify-center relative">
-                <Link className=" bg-slate-200 rounded-lg underline" to="/register">Not a member yet?</Link>
             </section>
         </main>
     )

@@ -4,7 +4,7 @@ import './App.css';
 import { Login } from './auth/Login';
 import { Register } from './auth/Register';
 import { NavBar } from './nav/NavBar';
-import { ApplicationViews } from './views/ApplicationVews';
+import { ApplicationViews } from './views/ApplicationViews';
 import { Authorized } from './views/Authorized';
 
 //import { ThirstForTravel } from './ThirstForTravel';
