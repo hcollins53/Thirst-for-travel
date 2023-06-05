@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +8,7 @@
   @apply bg-cover bg-[url("https://i.etsystatic.com/24552383/r/il/3063dd/2627842940/il_1140xN.2627842940_knqa.jpg")];
 }
 .title{
-  @apply font-body text-4xl justify-center h-10 bg-aliceBlue
+  @apply font-body text-4xl justify-center h-10 bg-lion
 }
 .signIn {
   @apply inline-block items-center bg-slate-200 bg-opacity-90 shadow-lg rounded-lg
@@ -19,9 +19,18 @@
 .form-control {
   @apply rounded mb-4 border border-gray-700
 }
-.btn {
-  @apply bg-lion rounded-full py-2 px-3 text-xs cursor-pointer tracking-wider
+.background {
+  @apply bg-contain bg-[url("https://mail.google.com/mail/u/0?ui=2&ik=d893f429cf&attid=0.1.1&permmsgid=msg-f:1767541423958244148&th=1887918f6cd1bb34&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ-st6rG4vdzetN9-aFMNPwzGEskNGX6ANHD7LGtje0NNquOL9rlbJLsiFbdiJxAxGvqTuPSBo6FKbLAHppWQv8ll7cJ04PWL5geVQmlwUKaxITuQP04Jz1uJek&disp=emb")]
 }
+.front {
+  @apply bg-cover opacity-70 bg-[url("https://a.storyblok.com/f/53624/4096x1280/4358be1064/stock-photo-landscape-with-atrani-town-at-famous-amalfi-coast-italy-1436187389.jpg")]
+}
+ [data-theme="mytheme"] .btn{
+  background-color: lion;
+  }
+  .btn {
+    text-transform: none; 
+  }
 
 //https://i.pinimg.com/originals/6a/a7/a1/6aa7a15ee5b669f6d512220b061d036c.jpg;
 

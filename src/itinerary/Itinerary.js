@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react"
-import { getItinerary } from "../ApiManager"
+
 
 export const AddingToTheItinerary = () => {
-    const [trip, setTrip] = useState({})
-    const localTravelUser = localStorage.getItem("travel_user")
-    const travelUser = JSON.parse(localTravelUser)
-    useEffect(
-        () => {
-           getItinerary(travelUser)
-             .then((data) => {
-                const singleItinerary = data[0]
-                setTrip(singleItinerary)
-             })
+    // const [trip, setTrip] = useState({})
+    // const localTravelUser = localStorage.getItem("travel_user")
+    // const travelUser = JSON.parse(localTravelUser)
+    // useEffect(
+    //     () => {
+    //        getItinerary(travelUser)
+    //          .then((data) => {
+    //             const singleItinerary = data[0]
+    //             setTrip(singleItinerary)
+    //          })
             
-        },
-        [] 
-    )
+    //     },
+    //     [] 
+    // )
     return <>
-    <h2>Trip To {trip.name}</h2>
-    <p> 🗓️{trip.startDate}-{trip.endDate} </p>
+    {/* <h2>Trip To {trip.name}</h2>
+    <p> 🗓️{trip.startDate}-{trip.endDate} </p> */}
     <p>Explore</p>
     //see if I can find an api that shows top places to visit the area you selected
     <p>Places to Visit</p> 
