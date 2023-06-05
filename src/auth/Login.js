@@ -1,55 +1,61 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
-import { getLogin } from "../ApiManager";
+import { loginUser } from "./LoginProvider";
 
-export const Login = () => {
-    const [email, set] = useState("")
+
+export const Login = ({setToken}) => {
+    const username = useRef()
+    const password = useRef()
+    const invalidDialog = useRef()
     const navigate = useNavigate()
 
     const handleLogin = (e) => {
         e.preventDefault()
-
-        getLogin( email )
-            .then(foundUsers => {
-                if (foundUsers.length === 1) {
-                    const user = foundUsers[0]
-                    localStorage.setItem("travel_user", JSON.stringify({
-                        id: user.id,
-                        staff: user.isStaff
-                    }))
-
-                    navigate("/planning")
-                }
-                else {
-                    window.alert("Invalid login")
-                }
-            })
+        const user = {
+            username: username.current.value,
+            password: password.current.value
+        }
+        loginUser(user)
+                .then(res => {
+                    if ("valid" in res && res.valid && "token" in res) {
+                        setToken(res.token, res.userId)
+                        navigate("/planning")
+                    }
+                    else {
+                        invalidDialog.current.showModal()
+                    }
+                })
     }
 
     return (
-        <main className="font-body w-screen h-screen image">
-            <section className="flex justify-center pt-56">
-                <form className="signIn" onSubmit={handleLogin}>
-                    <h2 className="signIn_h2">Please sign in</h2>
-                    <fieldset className="ml-4 mr-4">
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input type="email"
-                            value={email}
-                            onChange={evt => set(evt.target.value)}
-                            className="form-control"
-                            required autoFocus />
-                    </fieldset>
-                    <fieldset className="">
-                        <button type="submit" className="ml-32 text-lg underline mb-2">
-                            Sign in
-                        </button>
-                    </fieldset>
-                    <section className="flex justify-center relative mb-2">
-                    <Link className="ml-48 underline text-sm" to="/register">Not a member yet?</Link>
-                </section>
+        <main className="font-body w-screen h-screen">
+            <dialog className="dialog dialog--auth" ref={invalidDialog}>
+                <div>Username or password was not valid.</div>
+                <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
+            </dialog>
+            <div className="flex">
+            <div className="w-full md:w-1/2 bg-gray-100 p-8 mx-auto">
+                <h1 className="text-4xl font-bold mb-8">Please Log in before continuing</h1>
+                <form className="" onSubmit={handleLogin}>
+                    <div className="mb-4">
+                        <label className="block text-lg font-semibold">Username</label>
+                        <input ref={username} type="text" className="w-full border border-gray-300 px-4 py-2 rounded-lg" placeholder="Enter your username"/>
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-lg font-semibold">Password</label>
+                        <input ref={password} type="password" className="w-full border border-gray-300 px-4 py-2 rounded-lg" placeholder="Enter your password"/>
+                    </div>
+                    <button className="bg-blue-500 text-black font-semibold py-2 px-4 rounded-lg hover:bg-blue-600">Login</button>
                 </form>
+                <section className="m-auto w-96 bg-slate-200 bg-opacity-60 shadow-lg rounded-lg">
+                Do not have an account? <Link to="/register">Register here</Link>
             </section>
+            </div>
+            <div className=" md:block w-full md:w-1/2">
+                <img src="https://media.cntraveler.com/photos/5a70f9d68af0dc48d25daf9f/16:9/w_4447,h_2501,c_limit/Haedong-Yonggungsa-Temple-GettyImages-874460458.jpg" alt="Beautiful Image" class="object-cover w-full h-[750px]"/>
+                </div>
+            </div>
         </main>
     )
 }

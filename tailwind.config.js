@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Pacifico']
+        body: ['Satisfy']
       }, 
       colors: {
       timberwolf: '#D8D5D3ff',
@@ -17,5 +17,26 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          timberwolf: '#D8D5D3ff',
+          lion: '#BE8E71ff',
+          silver: '#CCBEB8ff',
+          aliceBlue: '#DAE7EDff',
+          blue: '#57819Cff',
+        },
+      },
+    ],
+    styled: true,
+    themes: true,
+    base: false,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+    darkTheme: "dark",
+  },
 }

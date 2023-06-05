@@ -6,17 +6,25 @@ import { Register } from './auth/Register';
 import { NavBar } from './nav/NavBar';
 import { ApplicationViews } from './views/ApplicationViews';
 import { Authorized } from './views/Authorized';
+import { ThirstForTravel } from './ThirstForTravel';
 
 //import { ThirstForTravel } from './ThirstForTravel';
 
 
 function App() {
-  const navigate = useNavigate()
+   const setToken = (auth_token, user_id) => {
+		let token = {
+			"token": auth_token,
+			"userId": user_id
+		}
+		localStorage.setItem('hike_user', JSON.stringify(token))
+	  }
   return <>
    <h1 className='title'>Thirst for Travel</h1>
    <Routes>
-        <Route path="/login" element={<Login />} />
-		  <Route path="/register" element={<Register />} />  
+      <Route path="/" element={<ThirstForTravel />} />
+      <Route path="/login" element={<Login setToken={setToken}/>} />
+		  <Route path="/register" element={<Register setToken={setToken}/>} />  
 		<Route path="*" element={
 			<Authorized>
 				<>

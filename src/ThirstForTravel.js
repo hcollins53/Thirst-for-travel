@@ -1,24 +1,24 @@
-// import { Route, Routes } from "react-router-dom"
-// import { Login } from "./auth/Login"
-// import { Register } from "./auth/Register"
-// import { NavBar } from "./nav/NavBar"
-// import { ApplicationViews } from "./views/ApplicationVews"
-// import { Authorized } from "./views/Authorized"
 
-// export const ThirstForTravel = () => {
-//     return <Routes>
-//         <Route path="/login" element={<Login />} />
-// 		  <Route path="/register" element={<Register />} />  
-// 		<Route path="*" element={
-// 			<Authorized>
-// 				<>
-// 					<NavBar />
-// 					<ApplicationViews />
-// 				</>
-// 			</Authorized>
 
-// 		} />
-// 	</Routes>
- 
+import { useNavigate } from 'react-router-dom';
+
+export const ThirstForTravel = () => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
+
+  return (
+    <>
+    <article className='front h-screen'>
+    <div className='flex justify-center flex-col'>
+      <div className="mx-auto mt-52 mb-10 text-xl  bg-slate-200 p-4 rounded-lg ">Discover the World and Awaken Your Thirst for Travel: Create the Itinerary of Your Dreams!</div>
+      <button className=" bg-slate-200 p-4 rounded-lg w-[300px] mx-auto" onClick={handleLoginClick}>Start Planning Today!</button>
+      </div>
+      </article>
+    </>
+  );
+};
+
   
-// }

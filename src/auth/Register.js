@@ -1,66 +1,79 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { findEmail, getRegister } from "../ApiManager"
 
-export const Register = (props) => {
-    const [user, setUser] = useState({
-        email: "",
-        fullName: "",
-    })
-    let navigate = useNavigate()
+import { useRef } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { registerUser } from "./LoginProvider";
 
-    const registerNewUser = () => {
-        getRegister(user)
-            .then(createdUser => {
-                if (createdUser.hasOwnProperty("id")) {
-                    localStorage.setItem("travel_user", JSON.stringify({
-                        id: createdUser.id,
-                    }))
-
-                    navigate("/")
-                }
-            })
-    }
+export const Register = ({setToken}) => {
+    const firstName = useRef()
+    const lastName = useRef()
+    const username = useRef()
+    const password = useRef()
+    const verifyPassword = useRef()
+    const passwordDialog = useRef()
+    const navigate = useNavigate()
 
     const handleRegister = (e) => {
         e.preventDefault()
-        findEmail(user.email)
-            .then(response => {
-                if (response.length > 0) {
-                    // Duplicate email. No good.
-                    window.alert("Account with that email address already exists")
-                }
-                else {
-                    // Good email, create user.
-                    registerNewUser()
-                }
-            })
-    }
+        if (password.current.value === verifyPassword.current.value) {
+            const newUser = {
+                "username": username.current.value,
+                "first_name": firstName.current.value,
+                "last_name": lastName.current.value,
+                "password": password.current.value
+            }
 
-    const updateUser = (evt) => {
-        const copy = {...user}
-        copy[evt.target.id] = evt.target.value
-        setUser(copy)
+            registerUser(newUser)
+                .then(res => {
+                    if ("token" in res) {
+                        setToken(res.token, res.userId)
+                        navigate("/planning")
+                    }
+                })
+        } else {
+            passwordDialog.current.showModal()
+        }
     }
 
     return (
-        <main className="mb-4 font-body w-screen h-screen image"style={{ textAlign: "center" }}>
-            <form className="signIn mt-48" onSubmit={handleRegister}>
-                <h1 className=" text-3xl item-center mb-4 border-b-2 border-gray-700">Please Register</h1>
-                <fieldset>
-                    <label className="mr-4" htmlFor="fullName"> Name </label>
-                    <input onChange={updateUser}
-                           type="text" id="fullName" className="form-control" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label className="ml-4" htmlFor="email"> Email address </label>
-                    <input onChange={updateUser}
-                        type="email" id="email" className="form-control mr-4" required />
-                </fieldset>
-                <fieldset>
-                    <button className="bg-slate-200 rounded-lg underline bg-opacity-80 mb-2" type="submit"> Register </button>
-                </fieldset>
-            </form>
+        <main className="font-body w-screen h-screen">
+            <div className="flex">
+            <div className="w-full md:w-1/2 bg-gray-100 p-8 mx-auto">
+                <h1 className="text-4xl font-bold mb-8">Please Register before continuing</h1>
+                <dialog className="dialog dialog--password" ref={passwordDialog}>
+                <div>Passwords do not match</div>
+                <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
+            </dialog>
+                <form className="" onSubmit={handleRegister}>
+                <div className="mb-4">
+                        <label className="block text-lg font-semibold">First Name</label>
+                        <input ref={firstName} type="text" name="firstName" className="w-full border border-gray-300 px-4 py-2 rounded-lg" placeholder="Enter your first name"/>
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-lg font-semibold">Last name</label>
+                        <input ref={lastName} name="lastName" type="text" className="w-full border border-gray-300 px-4 py-2 rounded-lg" placeholder="Enter your last name"/>
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-lg font-semibold">Username</label>
+                        <input ref={username} type="text" className="w-full border border-gray-300 px-4 py-2 rounded-lg" placeholder="Enter your username"/>
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-lg font-semibold">Password</label>
+                        <input ref={password} type="password" className="w-full border border-gray-300 px-4 py-2 rounded-lg" placeholder="Enter your password"/>
+                    </div>
+                    <div className="mb-6">
+                        <label className="block text-lg font-semibold">Verify Password</label>
+                        <input ref={verifyPassword} type="password" className="w-full border border-gray-300 px-4 py-2 rounded-lg" placeholder="Verify your password"/>
+                    </div>
+                    <button className="bg-blue-500 text-black font-semibold py-2 px-4 rounded-lg hover:bg-blue-600">Register</button>
+                </form>
+                <section className="m-auto w-96 bg-slate-200 bg-opacity-60 shadow-lg rounded-lg">
+                Already registered? <Link to="/login">Login</Link>
+            </section>
+            </div>
+            <div className="md:block w-full md:w-1/2">
+                <img src="https://www.thediscoveriesof.com/wp-content/uploads/2020/04/Beautiful-Travel-54.jpg" alt="Beautiful Image" className="object-cover h-screen w-[550px]"/>
+                </div>
+            </div>
         </main>
     )
 }
