@@ -17,7 +17,7 @@ function App() {
 			"token": auth_token,
 			"userId": user_id
 		}
-		localStorage.setItem('hike_user', JSON.stringify(token))
+		localStorage.setItem('travel_user', JSON.stringify(token))
 	  }
   return <>
    <h1 className='title'>Thirst for Travel</h1>
