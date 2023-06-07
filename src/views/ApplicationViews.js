@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { AddingToTheItinerary } from "../itinerary/Itinerary"
 import { PlanATrip } from "../itinerary/Planning"
+import { LocationActivities } from "../itinerary/LocationActivities"
 
 
 export const ApplicationViews = () => {
@@ -12,8 +13,9 @@ export const ApplicationViews = () => {
                 </>
                  
             }>
-              <Route path="/planning" element={<PlanATrip />} />
-              <Route path="/itinerary" element={<AddingToTheItinerary />} />
+              <Route path="planning" element={<PlanATrip />} />
+              <Route path="/itinerary/:tripId" element={<AddingToTheItinerary />} />
+              <Route path="/locations/:locationId/trip/:tripId" element={<LocationActivities />} />
             </Route>
         </Routes>
     )
