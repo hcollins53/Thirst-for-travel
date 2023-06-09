@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams, useLocation, useNavigate } from "react-router-dom"
+import { useParams, useLocation, useNavigate, Link } from "react-router-dom"
 import { GetGeoCodes, getActivities, getLocationById } from "./TripProvider"
 import { AddNewActivity, AddTripActivity, getActivityByName } from "../provider/ActivityProvider"
 
@@ -11,6 +11,8 @@ export const LocationActivities = () => {
     const [geoCode, setGeoCode] = useState({})
     const [activities, setActivities] = useState([])
     const [activityObj, setActivity] = useState({})
+    const[lat, setLat] = useState("")
+    const[lng, setLng] = useState("")
     useEffect(() => {
         getLocationById(parseInt(locationId)).then((data) => {
             setLocation(data)
@@ -19,12 +21,17 @@ export const LocationActivities = () => {
         if(location.name){
         GetGeoCodes(location.name).then((data)=> {
             setGeoCode(data)
-        })}
-    }, [location])
+        getActivities(location.name).then((data) => {
+            setActivities(data)
+        })})
+        
+    }}, [location])
     useEffect(() => {
         if(geoCode.hits){
         const lat = geoCode?.hits[0]?.point?.lat
         const lng = geoCode?.hits[0]?.point?.lng
+        setLat(lat)
+        setLng(lng)
         getActivities(lat, lng).then((data)=> {
                     setActivities(data)
                 })}
@@ -36,52 +43,60 @@ export const LocationActivities = () => {
         const newActivity= {
             name: activity.name,
             location: location.id,
-            cost: activity.price?.amount,
-            description: activity.description,
-            booking_link: activity.bookingLink,
-            picture: activity.pictures[0],
-            minimum_duration: activity.minimumDuration
+            place_id: activity.place_id,
+            rating: activity.rating,
+            vicinity: activity.vicinity,
+            lat: activity?.geometry?.location?.lat,
+            lng: activity?.geometry?.location?.lng
         }
 
        AddNewActivity(newActivity).then(
             response => response.json())
             .then(() => {
                 getActivityByName(activity.name).then((data) =>{
-                    setActivity(data)
+                    const singleActivity = data[0]
+                    setActivity(singleActivity)
                 })
-                const newTripActivity= {
+               
+    })}
+   const AddNewTripActivity = () => {
+     const newTripActivity= {
                     location: parseInt(locationId),
                     activity: activityObj.id
                 }
+                console.log(newTripActivity)
                 AddTripActivity(newTripActivity, parseInt(tripId)).then(
                     response => response.json()
                 )
             .then(() =>{
                 navigate(`/itinerary/${tripId}`)})
-    })}
-   
+   }
+   useEffect(() => {
+    if(activityObj.name){
+        AddNewTripActivity()
+    }
+   },[activityObj])
     return <>List of Activities via Location
     
     <div>{location.name}</div>
    
     
-        { activities?.data?.map(activity => {
+        { activities?.results?.map(activity => {
         return <>
         <div>
-        {activity.name}
-        <img className="rounded-full shadow-xl w-60 h-60" src={activity.pictures[0]} />
-        <liv>
-        {activity.description}</liv>
-        <liv>{activity.price?.amount}</liv>
-        <liv>{activity.minimumDuration}</liv>
-        <liv>{activity.bookingLink}
-        </liv>
+        <Link to={`/activityDetail/${activity.place_id}/${lat}/${lng}`}> {activity.name} </Link>
+        {/* <img className="rounded-full shadow-xl w-60 h-60" src={activity.pictures[0]} /> */}
+        <div>
+        {activity.rating}</div>
+        <div>{activity.vicinity}</div>
+        <div>{activity?.types[0]}</div>
         <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent, activity)}
              className="mb-4 mt-2 btn btn-lion btn-sm">
                 Add Activity to Itinerary</button>
         </div>
         </>
-    }) 
-}
+        })}
+
     </>
 }
+

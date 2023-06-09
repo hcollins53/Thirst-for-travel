@@ -2,7 +2,22 @@ import { useEffect, useState } from "react"
 import { AddNewLocation, AddTripLocation, getLocationByName, getTripById } from "./TripProvider"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { DeleteTripActivity, getActivitiesFromTrip } from "../provider/ActivityProvider"
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import { Icon } from 'leaflet/src/layer/marker/Icon'
 
+export const MapMarker = (activities) => {
+     return activities.map(activity => {
+     return<>
+     
+     <Marker  position={[activity.lat,activity?.lng]} icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41]})}>
+       <Popup className="font-title">
+       <div> {activity?.name} </div>
+       </Popup>
+       </Marker>
+     
+           </>     })
+   }
 
 export const AddingToTheItinerary = () => {
     const { tripId } = useParams()
@@ -13,16 +28,23 @@ export const AddingToTheItinerary = () => {
     const [activities, setActivities] = useState([])
     useEffect(
         () => {
-           getTripById(parseInt(tripId))
+           getTripAndActivities()
+           
+        },
+        [] 
+    )
+    const getTripAndActivities = () => {
+        getTripById(parseInt(tripId))
              .then((data) => {
                 setTrip(data)
              }).then(() => {
                 getActivities()
              })
-           
-        },
-        [] 
-    )
+    }
+    useEffect(() => {
+        if(tripLocation.name){
+        AddNewTripLocation()}
+    }, [tripLocation])
     const getActivities = () => {
         getActivitiesFromTrip(parseInt(tripId)).then((data) => {setActivities(data)})
     }
@@ -31,7 +53,7 @@ export const AddingToTheItinerary = () => {
         name: ""
     })
 
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
@@ -46,14 +68,16 @@ export const AddingToTheItinerary = () => {
                     const singleLocation = data[0]
                     setTripLocation(singleLocation)
                 })
-                const newTripLocation= {
-                    location: tripLocation.id
-                }
-                AddTripLocation(newTripLocation, parseInt(tripId)).then(
-                    response => response.json()
-                )
-            .then(() =>{
-                navigate(`/itinerary/${tripId}`)})
+    })}
+    const AddNewTripLocation = () => {
+            const newTripLocation= {
+                location: tripLocation.id
+            }
+            AddTripLocation(newTripLocation, parseInt(tripId)).then(
+                response => response.json()
+            )
+        .then(() =>{
+            getTripAndActivities()
     })}
     const handleDelete = (event, activity, location) => {
         event.preventDefault()
@@ -65,13 +89,29 @@ export const AddingToTheItinerary = () => {
             getActivities()
          })  
     }
+    function MyMapComponent() {
+      return (
+          <MapContainer center={[47.6588, -117.4260]} zoom={1} scrollWheelZoom={true}>
+    <TileLayer
+      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+    {
+     MapMarker(activities)
+   }
+  
+  </MapContainer>
+      )
+} 
+
     return <>
+      <article className="">
     <h2>Trip To {trip?.name}</h2>
     <p> 🗓️{trip?.start_date}-{trip?.end_date} </p>
     <p>Explore</p>
     <div class="bg-white p-4 rounded-lg">
     <div class="relative bg-inherit">
-        <input type="text" id="location" name="location" className="peer bg-transparent h-10 w-72 rounded-lg text-gray-200 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Type inside me"
+        <input type="text" id="location" name="location" className="peer bg-transparent h-10 w-72 rounded-lg text-gray-600 placeholder-transparent ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="Type inside me"
         value = {location.name} 
         onChange={
             (evt) => {
@@ -88,15 +128,16 @@ export const AddingToTheItinerary = () => {
             </button>
     </div>
     </div>
+    <div>
     <p>locations</p>
+    <div className=" flex flex-row justify-between">
     <div>
   {
     trip?.locations?.map(location => {
       const filteredActivities = activities.filter(activity => {
-        return activity.activity_itinerary.filter(item => item.location === location.id);
+        return activity?.location?.id === location.location
         
-      });
-
+      })
       return (
         <div key={location.id}>
           <Link to={`/locations/${location.location}/trip/${tripId}`}>
@@ -117,9 +158,18 @@ export const AddingToTheItinerary = () => {
         </div>
       );
     })
+    
   }
+  </div>
+   <section id="map" className="justify-end">
+        {
+            MyMapComponent()
+        }
+    </section>
+   
+    </div>
 </div>
-
+</article>
    
     <p>Daily Itinerary</p>
     //see if I can split up the itinerary into each day

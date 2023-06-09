@@ -1,6 +1,6 @@
 const localUser = localStorage.getItem("travel_user")
     const user = JSON.parse(localUser)
-
+const google_key = process.env.REACT_APP_GOOGLE_KEY
     export const AddNewActivity = (newActivity) => {
         const token = user["token"]
         return fetch(`http://localhost:8000/activities`, {
@@ -57,3 +57,12 @@ const localUser = localStorage.getItem("travel_user")
         })
                 .then(res => res.json())
     }
+    export const getActivityDetails = (placeId) => {
+        return fetch(`https://thirst-for-travel.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${google_key}`, {
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                }).then(response => response.json())
+    }
+
+    

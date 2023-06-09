@@ -5,13 +5,16 @@ export const NavBar = () => {
     return (
         <ul className="font-body bg-lion flex row justify-evenly">
             <li>
-                Explore
+               <Link to="/packing"> Packing List</Link>
             </li>
             <li>
-                My Itinerary
+                My Itineraries
             </li>
             <li>
-                Community
+                Lodging
+            </li>
+            <li>
+                Flights
             </li>
              <li className="navbar__item navbar__logout">
                         <Link className="navbar__link" to="" onClick={() => {
