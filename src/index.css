@@ -3,6 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "leaflet/dist/leaflet.css";
 
 .image {
   @apply bg-cover bg-[url("https://i.etsystatic.com/24552383/r/il/3063dd/2627842940/il_1140xN.2627842940_knqa.jpg")];
@@ -31,11 +32,15 @@
   .btn {
     text-transform: none; 
   }
+  .leaflet-container {
 
-//https://i.pinimg.com/originals/6a/a7/a1/6aa7a15ee5b669f6d512220b061d036c.jpg;
+    width: 65vw;
 
-//https://i.pinimg.com/originals/ef/ee/45/efee45be3e02d5b878dcfd60f5a206aa.jpg;
-//https://i.pinimg.com/564x/9e/65/30/9e65305a8bb97b071ed50b14bab9594f.jpg;
-//https://i.pinimg.com/564x/8f/95/85/8f9585d325c08ab7ab1271cba7ab50c7.jpg;
-//https://i.pinimg.com/564x/18/7d/a4/187da4c20012b8de27a78e80be2d4fb7.jpg;
-//https://i.pinimg.com/originals/f0/66/d0/f066d0a18c877a742243e508f3b15b08.jpg
+    height: 77vh;
+
+    margin-left: 3%;
+
+    border-radius: 10px;
+
+}
+
