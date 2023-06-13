@@ -4,6 +4,11 @@ import { PlanATrip } from "../itinerary/Planning"
 import { LocationActivities } from "../itinerary/LocationActivities"
 import { ActivityDetails } from "../itinerary/ActivityDetails"
 import { PackingList } from "../packing/PackingList"
+import { HotelList } from "../lodging/hotelList"
+import { Itineraries } from "../itinerary/ItineraryList"
+import { TransportationList } from "../flight/Transportation"
+import { FindFlight } from "../flight/Flight"
+import { TransportForm } from "../flight/TransportForm"
 
 
 export const ApplicationViews = () => {
@@ -20,6 +25,11 @@ export const ApplicationViews = () => {
               <Route path="/locations/:locationId/trip/:tripId" element={<LocationActivities />} />
               <Route path="/activityDetail/:placeId/:lat/:lng" element={<ActivityDetails />} />
               <Route path="/packing" element={<PackingList />} />
+              <Route path="/lodging" element={<HotelList />} />
+              <Route path="/itineraries" element={<Itineraries />} />
+              <Route path="/flights" element={<FindFlight />} />
+              <Route path="/transportation" element={<TransportationList />} />
+              <Route path="/transportForm/:tripId" element={<TransportForm />} />
             </Route>
         </Routes>
     )
