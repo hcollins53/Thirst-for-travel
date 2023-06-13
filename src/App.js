@@ -20,7 +20,6 @@ function App() {
 		localStorage.setItem('travel_user', JSON.stringify(token))
 	  }
   return <>
-   <h1 className='title'>Thirst for Travel</h1>
    <Routes>
       <Route path="/" element={<ThirstForTravel />} />
       <Route path="/login" element={<Login setToken={setToken}/>} />
