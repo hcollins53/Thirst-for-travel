@@ -9,7 +9,7 @@
   @apply bg-cover bg-[url("https://i.etsystatic.com/24552383/r/il/3063dd/2627842940/il_1140xN.2627842940_knqa.jpg")];
 }
 .title{
-  @apply font-body text-4xl justify-center h-10 bg-lion
+  @apply font-body text-4xl justify-center h-10
 }
 .signIn {
   @apply inline-block items-center bg-slate-200 bg-opacity-90 shadow-lg rounded-lg
@@ -25,6 +25,12 @@
 }
 .front {
   @apply bg-cover opacity-70 bg-[url("https://a.storyblok.com/f/53624/4096x1280/4358be1064/stock-photo-landscape-with-atrani-town-at-famous-amalfi-coast-italy-1436187389.jpg")]
+}
+.planning {
+  @apply bg-cover bg-[url("https://wallpaperaccess.com/full/4297519.jpg")]
+}
+.packing {
+  @apply bg-cover bg-[url("https://www.thebellevoyage.com/wp-content/uploads/2022/08/how-to-pack-a-suitcase-to-maximize-space-4-1024x682.jpg")]
 }
  [data-theme="mytheme"] .btn{
   background-color: lion;

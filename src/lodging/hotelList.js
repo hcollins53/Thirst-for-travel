@@ -85,9 +85,10 @@ export const HotelList = () => {
     const CheckIfLocationIsThere = () => {
        
     }
-    return <>List of Hotels via Location
-    <div>Which Trip do you want view lodging for?</div>
-    <select onClick={(evt) => GrabTrip(evt)}>
+    return <>
+    <div className="bg-darkGray h-screen">
+    <div className="text-paleGray text-3xl text-center pt-10">Explore Hotels and other Lodging</div>
+    <select className="ml-4" onClick={(evt) => GrabTrip(evt)}>
      <option name= "trip">Choose a Trip</option>
 
         {
@@ -100,6 +101,7 @@ export const HotelList = () => {
     </select>
     {
         trip.name ?
+        
          <select onClick={(evt) => GrabLocation(evt)}>
       <option name= "trip">Choose a Location</option>
  
@@ -110,7 +112,13 @@ export const HotelList = () => {
                  value={trip.location}> {trip.location_name}</option> 
          )})
          }
-     </select> : ""
+     </select> : <div className="flex flex-wrap justify-end w-1/2 ml-96">
+        <div className="m-1"> <img className="w-72 rounded-full" src="https://media1.dallasobserver.com/dal/imager/u/magnum/13585964/hobbit_house-credit-jessica-serna.jpg?cb=1653512046"/> </div>
+        <div className="m-1"><img className="w-56 m-1 rounded-full" src="https://www.territorysupply.com/wp-content/uploads/2021/11/Unique-Places-to-Stay-in-Colorado-min.jpg"/></div>
+        <div className="m-1"><img className="w-56 mt-2 rounded-full" src="https://media.cntraveler.com/photos/61a60b14e663d9fce4b711c1/1:1/w_800,h_801,c_limit/Airbnb%2039271504.jpg"/></div>
+        <div className="m-1"><img className="w-72 rounded-full" src="https://www.atastefortravel.ca/wp-content/uploads/2018/05/Aruba-Ocean-Villas-Credit-Stivin-Sanchez-Photography.jpg"/></div>
+
+     </div>
     }
     {
         trips.locations && trip.name ? <div>Go back and add a location to your trip</div> : ""
@@ -133,6 +141,6 @@ export const HotelList = () => {
         </div>
         </>
         })}
-
+</div>
     </>
 }

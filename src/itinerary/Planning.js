@@ -30,13 +30,18 @@ export const PlanATrip = () => {
 
     }
     return <>
-            <div className="bg-silver  w-screen h-screen">
-            <form className="text-center pt-48 rounded font-body ml-96 w-1/3">
-                <h1 className="mb-4 text-2xl w-56 ml-28">Plan a New Trip</h1>
-                <fieldset className="mb-4">
-                    <label> Trip Name </label>
+            <div className="planning h-screen">
+                {/* <div>
+                    <img src="https://loveincorporated.blob.core.windows.net/contentimages/gallery/650e9ba2-eeb9-40ad-af06-180d24416dde-plane-flying-takeoff-shutterstock.jpg"/>
+                </div> */}
+                <div className="bg-opacity-60 h-screen">
+            <form className="text-center py-32 rounded mx-auto">
+                <div className="bg-paleGray w-[600px] mx-auto bg-opacity-60">
+                <h1 className="mb-10 pt-4 text-5xl font-body text-red-800 mx-auto">Create a New Adventure</h1>
+                <fieldset className="mb-10">
+                    <label className="text-2xl"> Trip Name </label>
                     <input type="text" 
-                            className="rounded border-b-black"
+                            className="rounded border-b-2"
                             placeholder= "eg. Summer in Rome"
                             value = {trip.name} 
                             onChange={
@@ -47,9 +52,8 @@ export const PlanATrip = () => {
                                 }
                             } />
                 </fieldset>
-                <fieldset>
-                
-                    <div className="flex items-center">
+                <fieldset className="mb-10">
+                    <div className="items-center flex justify-center">
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                             <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
@@ -103,10 +107,12 @@ export const PlanATrip = () => {
             </fieldset> */}
             <button 
              onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-             className="mb-4 mt-2 btn btn-lion btn-sm">
+             className="mb-4 mt-2 btn btn-dustyRose btn-md">
                 Start Planning
             </button>
+            </div>
             </form>
+            </div>
             </div>
     </>
 }

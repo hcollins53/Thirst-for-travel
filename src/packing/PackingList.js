@@ -52,9 +52,11 @@ export const PackingList = () => {
          })  
     }
     return<>
-    <div>Which Trip do you want a packing list for?</div>
+    <div className="packing h-screen p-10">
+        <div className="bg-paleGray overlay mx-auto w-3/6 rounded-lg h-auto p-6 border-dustyRose border-4 shadow-lg">
+    <div className="mx-auto text-2xl flex justify-center pt-10">Ultimate Packing List</div>
     <select onClick={(evt) => GrabTrip(evt)}>
-     <option name= "trip">Choose a Trip</option>
+     <option className= "rounded-lg">Choose a Trip</option>
 
         {
         trips.map((trip) => {
@@ -64,10 +66,10 @@ export const PackingList = () => {
         )})
         }
     </select>
-    <div class="bg-white p-4 rounded-lg">
+    <div className=" p-4 rounded-lg">
         <div className="relative bg-inherit">
-        <label for="packing" className="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">What do you want to add to your packing list?</label>
-        <input type="text" id="packing" name="packing" className="peer bg-transparent h-10 w-72 rounded-lg text-gray-600 ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="item"
+        <label for="packing" className=" absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all">What do you want to add to your packing list?</label>
+        <input type="text" id="packing" name="packing" className="peer w-52 bg-transparent h-10 w-72 rounded-lg text-gray-600 ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="item"
         value = {packing.item} 
         onChange={
             (evt) => {
@@ -76,7 +78,7 @@ export const PackingList = () => {
                 updatePacking(copy)
             }
         }/>
-        <input type="text" id="packing" name="packing" className="peer bg-transparent h-10 w-72 rounded-lg text-gray-600 ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="amount"
+        <input type="text" id="packing" name="packing" className="peer w-52 bg-transparent h-10 w-72 rounded-lg text-gray-600 ring-2 px-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600" placeholder="amount"
         value = {packing.amount} 
         onChange={
             (evt) => {
@@ -93,6 +95,7 @@ export const PackingList = () => {
             </button>
             </div>
     </div>
+   
     {
         trip.name ? <h3> Packing List for {trip.name}</h3> : ""
     }
@@ -106,5 +109,7 @@ export const PackingList = () => {
                   </button>
                 </div> </> }): ""
         }
+        </div>
+        </div>
     </>
 }

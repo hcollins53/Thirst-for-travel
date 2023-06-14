@@ -7,6 +7,7 @@ import { NavBar } from './nav/NavBar';
 import { ApplicationViews } from './views/ApplicationViews';
 import { Authorized } from './views/Authorized';
 import { ThirstForTravel } from './ThirstForTravel';
+import { SideBar } from './nav/SideBar';
 
 //import { ThirstForTravel } from './ThirstForTravel';
 
@@ -28,6 +29,7 @@ function App() {
 			<Authorized>
 				<>
 					<NavBar />
+					{/* <SideBar /> */}
 					<ApplicationViews />
 				</>
 			</Authorized>
