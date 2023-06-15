@@ -110,7 +110,7 @@ const user = JSON.parse(localUser)
     //     }).then(response => response.json())
     // }
     export const GetGeoCodes = (city) => {
-        return fetch(`https://thirst-for-travel.herokuapp.com/https://graphhopper.com/api/1/geocode?q=${city}&limit=1&key=${geoCode_key}`)
+        return fetch(`https://graphhopper.com/api/1/geocode?q=${city}&limit=1&key=${geoCode_key}`)
         .then(response => response.json())
     }
     // export const getActivities = (lat, lng) => {

@@ -3,10 +3,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getTripById } from "../itinerary/TripProvider"
 import { AddNewTransportation } from "../provider/TransportationProvider"
 
-export const TransportForm = () => {
+export const TransportForm = ({trip, tripId}) => {
     const navigate = useNavigate()
-    const [trip, setTrip] = useState({})
-    const {tripId} = useParams()
+
     const [transportation, update] = useState({
         trip: 0,
         dep_date: "",
@@ -16,11 +15,7 @@ export const TransportForm = () => {
         dep_location: 0,
         arr_location: 0
     })
-    useEffect(() => {
-        getTripById(parseInt(tripId)).then(data => {
-            setTrip(data)
-        })
-    }, [])
+    
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
 
@@ -40,12 +35,12 @@ export const TransportForm = () => {
     }
     return <>
     <article> 
-    <form className="font-title h-screen">
-            <h2 className="text-4xl pt-10 pb-10 text-center">Add a new transportation for {trip.name}</h2>
-            <div className="border-2 border-black shadow-xl rounded-xl p-10 bg-silver text-center">
+    <form className="font-title h-full w-full bg-paleGray">
+            <h2 className="text-4xl pt-4 pb-10 text-center">Add a new transportation for {trip.name}</h2>
+            <div className="border-2 border-black shadow-xl rounded-xl mx-auto p-10 bg-silver text-center w-[500px]">
             <fieldset className="mb-2">
                 <div className="form-group flex justify-center flex-col">
-                    <label className="mb-2">Type of transportation</label>
+                    <label className="mb-2">Mode of transportation</label>
                     <input
                         required autoFocus
                         type="text"
@@ -162,7 +157,7 @@ export const TransportForm = () => {
             </fieldset>
             <button 
              onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-             className="btn btn-justColor font-light">
+             className="btn bg-dustyRose font-light">
                 Submit New Transportation
             </button>
             </div>

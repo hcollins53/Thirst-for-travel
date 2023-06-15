@@ -64,7 +64,7 @@ export const Itineraries = () => {
     return (
       <>
         {/* <h1>My Itineraries</h1> */}
-        <div className="bg-tan h-screen">
+        <div className="bg-paleGray h-screen">
         <div className="flex flex-wrap px-32 items-center justify-center pt-10">{renderGridItems()}</div>
         <Link className="btn ml" to="/planning">
           Plan a new trip

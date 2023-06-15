@@ -33,3 +33,10 @@ export const getLodgingByName = (name) => {
     })
             .then(res => res.json())
 }
+export const getHotelDetails = (placeId) => {
+    return fetch(`https://thirst-for-travel.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${google_key}`, {
+                headers: {
+                    "Accept": "application/json"
+                }
+            }).then(response => response.json())
+}

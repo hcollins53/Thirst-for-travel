@@ -76,27 +76,30 @@ export const LocationActivities = () => {
         AddNewTripActivity()
     }
    },[activityObj])
-    return <>List of Activities via Location
-    
-    <div>{location.name}</div>
-   
+    return <>
+    <div className="">
+        <div className="">
+    <div className="text-center text-3xl pt-4 pb-4 bg-paleGray">Activities to do {location.name}</div>
+    <div className="mx-auto bg-paleGray">
     
         { activities?.results?.map(activity => {
         return <>
-        <div>
+        <div className="mx-auto flex flex-col text-center justify-center w-[300px]">
         <Link to={`/activityDetail/${activity.place_id}/${lat}/${lng}`}> {activity.name} </Link>
         {/* <img className="rounded-full shadow-xl w-60 h-60" src={activity.pictures[0]} /> */}
         <div>
-        {activity.rating}</div>
+        rating: {activity.rating}</div>
         <div>{activity.vicinity}</div>
         <div>{activity?.types[0]}</div>
         <button onClick={(clickEvent) => handleSaveButtonClick(clickEvent, activity)}
-             className="mb-4 mt-2 btn btn-lion btn-sm">
+             className="mb-4 mt-2 btn w-[200px] mx-auto bg-maroonBrown btn-sm">
                 Add Activity to Itinerary</button>
         </div>
         </>
         })}
-
+        </div>
+</div>
+</div>
     </>
 }
 

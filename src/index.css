@@ -32,8 +32,12 @@
 .packing {
   @apply bg-cover bg-[url("https://www.thebellevoyage.com/wp-content/uploads/2022/08/how-to-pack-a-suitcase-to-maximize-space-4-1024x682.jpg")]
 }
+.activity {
+  @apply bg-cover opacity-10 bg-[url("https://s20426.pcdn.co/wp-content/uploads/2019/03/iStock-808826158.jpg")]
+}
  [data-theme="mytheme"] .btn{
-  background-color: lion;
+  background-color: dustyRose;
+  text-transform: none; 
   }
   .btn {
     text-transform: none; 
@@ -44,7 +48,7 @@
 
     height: 77vh;
 
-    margin-left: 3%;
+    margin-left: 0%;
 
     border-radius: 10px;
 

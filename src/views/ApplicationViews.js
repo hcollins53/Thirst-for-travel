@@ -9,6 +9,7 @@ import { Itineraries } from "../itinerary/ItineraryList"
 import { TransportationList } from "../flight/Transportation"
 import { FindFlight } from "../flight/Flight"
 import { TransportForm } from "../flight/TransportForm"
+import { HotelDetails } from "../lodging/hotelDetails"
 
 
 export const ApplicationViews = () => {
@@ -30,6 +31,7 @@ export const ApplicationViews = () => {
               <Route path="/flights" element={<FindFlight />} />
               <Route path="/transportation" element={<TransportationList />} />
               <Route path="/transportForm/:tripId" element={<TransportForm />} />
+              <Route path="/hotelDetails/:placeId/:lat/:lng" element={<HotelDetails />} />
             </Route>
         </Routes>
     )
