@@ -7,12 +7,13 @@ export const NavBar = () => {
   <div className="max-w-5xl mx-auto px-4">
     <div className="flex items-center justify-center h-16">
       <div className="flex space-x-10 text-gray-900">
-               <Link to="/packing"> Packing List</Link>
-               <Link to="/itineraries"> My Itineraries </Link>
+      <Link className="font-title font-bold text-lg" to="/budget"> Budget</Link>
+               <Link className="font-title font-bold text-lg" to="/packing"> Packing List</Link>
+               <Link className="font-title font-bold text-lg" to="/itineraries"> My Itineraries </Link>
                <Link to="/planning"> <span className="text-3xl text-maroonBrown font-body">Thirst For Travel</span> </Link>
-               <Link to="/lodging"> Lodging</Link> 
-               <Link to='/transportation'>Flights</Link> 
-                        <Link className="navbar__link" to="" onClick={() => {
+               <Link className="font-title font-bold text-lg" to="/lodging"> Lodging</Link> 
+               <Link className="font-title font-bold text-lg" to='/transportation'>Flights</Link> 
+                        <Link className="font-title font-bold text-lg" to="" onClick={() => {
                             localStorage.removeItem("travel_user")
                             navigate("/", {replace: true})
                         }}>Logout</Link>

@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Satisfy']
+        body: ['Satisfy'],
+        title: ['Lato']
       }, 
       colors: {
         beige:' #c8b7a6',

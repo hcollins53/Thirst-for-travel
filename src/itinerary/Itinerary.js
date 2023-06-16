@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { AddNewLocation, AddTripLocation, GetGeoCodes, getLocationByName, getTripById } from "./TripProvider"
+import { AddNewLocation, AddTripLocation, GetGeoCodes, getHotelsByTrip, getLocationByName, getTripById } from "./TripProvider"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { DeleteTripActivity, getActivitiesFromTrip } from "../provider/ActivityProvider"
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
@@ -7,8 +7,10 @@ import {useMap} from 'react-leaflet'
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import { Icon } from 'leaflet/src/layer/marker/Icon'
 
-export const MapMarker = (activities) => {
-     return activities.map(activity => {
+export const MapMarker = (activities, hotels) => {
+     return <>
+     
+     {activities.map(activity => {
      return<>
      
      <Marker  position={[activity.lat,activity?.lng]} icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41]})}>
@@ -17,7 +19,18 @@ export const MapMarker = (activities) => {
        </Popup>
        </Marker>
      
-           </>     })
+           </>     })}
+           {hotels.map(hotel => {
+     return<>
+     
+     <Marker  position={[hotel.lat,hotel?.lng]} icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41]})}>
+       <Popup className="font-title">
+       <div> {hotel?.name} </div>
+       </Popup>
+       </Marker>
+     
+           </>     })}
+           </>
    }
 
 export const AddingToTheItinerary = () => {
@@ -28,6 +41,7 @@ export const AddingToTheItinerary = () => {
     const [geoCode, setGeoCode] = useState({})
     const [lat, setLat] = useState("")
     const [lng, setLng] = useState("")
+    const [hotels, setHotels] = useState([])
     
     useEffect(
         () => {
@@ -65,6 +79,7 @@ export const AddingToTheItinerary = () => {
     }, [tripLocation])
     const getActivities = () => {
         getActivitiesFromTrip(parseInt(tripId)).then((data) => {setActivities(data)})
+        getHotelsByTrip(parseInt(tripId)).then((data) => {setHotels(data)} )
     }
     
     const [location, updateLocation] = useState({
@@ -86,6 +101,8 @@ export const AddingToTheItinerary = () => {
                     const singleLocation = data[0]
                     setTripLocation(singleLocation)
                 })
+                updateLocation({})
+                setTripLocation({})
     })}
     const AddNewTripLocation = () => {
             const newTripLocation= {
@@ -96,6 +113,7 @@ export const AddingToTheItinerary = () => {
             )
         .then(() =>{
             getTripAndActivities()
+            setTripLocation({})
     })}
     const handleDelete = (event, activity, location) => {
         event.preventDefault()
@@ -112,7 +130,7 @@ export const AddingToTheItinerary = () => {
       setLat(activity.lat)
       setLng(activity.lng)
     }
-    function MyMapComponent({map, lat, lng, activities}) {
+    function MyMapComponent({map, lat, lng, activities, hotels}) {
     
       useEffect(() => {
         if (lat && lng) {
@@ -128,7 +146,7 @@ export const AddingToTheItinerary = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {
-       MapMarker(activities)
+       MapMarker(activities, hotels)
      }
     
 
@@ -137,7 +155,7 @@ export const AddingToTheItinerary = () => {
     function MapWrapper() {
       const map = useMap()
       return<>
-        <MyMapComponent map={map} lat={lat} lng={lng} activities={activities} />
+        <MyMapComponent map={map} lat={lat} lng={lng} activities={activities} hotels={hotels} />
         </>
     }
     return <>
@@ -165,18 +183,24 @@ export const AddingToTheItinerary = () => {
     </div>
     <div>
     <div className=" flex flex-row justify-between">
-    <div className="overflow-auto overflow-y-scroll overflow-hidden h-screen">
+    <div className="overflow-auto overflow-y-scroll w-1/2 overflow-hidden h-screen">
   {
     trip?.locations?.map(location => {
       const filteredActivities = activities.filter(activity => {
         return activity?.location?.id === location.location
-        
       })
+      const filteredHotels = hotels.filter(hotel => {return hotel?.location?.id === location.location})
       return (
         <div className="" key={location.id}>
           <Link className="text-xl font-bold underline" to={`/locations/${location.location}/trip/${tripId}`}>
             {location.location_name}
           </Link>
+          <div>{ filteredHotels.map(hotel => {
+           return <div className="mr-2"> <button onClick={(clickEvent) => handleChangeLat(clickEvent, hotel)}>{hotel.name}</button></div>
+
+    })
+    }
+          </div>
           {
             filteredActivities.map(activity => (
               <div className="flex justify-center" key={activity.id}>

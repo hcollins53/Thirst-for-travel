@@ -34,13 +34,13 @@ export const TransportForm = ({trip, tripId}) => {
             }) 
     }
     return <>
-    <article> 
-    <form className="font-title h-full w-full bg-paleGray">
-            <h2 className="text-4xl pt-4 pb-10 text-center">Add a new transportation for {trip.name}</h2>
-            <div className="border-2 border-black shadow-xl rounded-xl mx-auto p-10 bg-silver text-center w-[500px]">
+    <article className="font-title h-full w-full bg-paleGray"> 
+    <form className="">
+            <h2 className="text-2xl pt-4 pb-4 text-center font-bold">Add a new transportation for {trip.name}</h2>
+            <div className="border-2 border-black shadow-xl rounded-xl mx-auto p-4 bg-silver text-center w-[500px]">
             <fieldset className="mb-2">
                 <div className="form-group flex justify-center flex-col">
-                    <label className="mb-2">Mode of transportation</label>
+                    <label className="">Mode of transportation</label>
                     <input
                         required autoFocus
                         type="text"
@@ -56,7 +56,7 @@ export const TransportForm = ({trip, tripId}) => {
                         } />
                 </div>
             </fieldset>
-            <fieldset className="m-4">
+            <fieldset className="">
                 <div className="form-group flex justify-center flex-col">
                     <label htmlFor="description">Departure Location </label>
                     <select 
@@ -80,7 +80,7 @@ export const TransportForm = ({trip, tripId}) => {
                          </select>
                 </div>
             </fieldset>
-            <fieldset className="m-4">
+            <fieldset className="mt-2">
                 <div className="form-group flex justify-center flex-col">
                     <label htmlFor="description">Arrival Location </label>
                     <select 
@@ -104,7 +104,7 @@ export const TransportForm = ({trip, tripId}) => {
                          </select>
                 </div>
             </fieldset>
-            <fieldset className="m-4">
+            <fieldset className="mt-2">
                 <div className="form-group flex justify-center flex-col">
                     <label htmlFor="image">Departure Date</label>
                     <input required autoFocus
@@ -121,7 +121,7 @@ export const TransportForm = ({trip, tripId}) => {
                         } />
                 </div>
             </fieldset>
-            <fieldset className="m-4">
+            <fieldset className="mt-2">
                 <div className="form-group flex justify-center flex-col">
                     <label htmlFor="image">Departure Time</label>
                     <input required autoFocus
@@ -138,7 +138,7 @@ export const TransportForm = ({trip, tripId}) => {
                         } />
                 </div>
             </fieldset>
-            <fieldset className="m-4">
+            <fieldset className="mt-2">
                 <div className="form-group flex justify-center flex-col">
                     <label htmlFor="image">Arrival Time</label>
                     <input required autoFocus
@@ -157,7 +157,7 @@ export const TransportForm = ({trip, tripId}) => {
             </fieldset>
             <button 
              onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-             className="btn bg-dustyRose font-light">
+             className="btn bg-dustyRose mt-2 font-light">
                 Submit New Transportation
             </button>
             </div>

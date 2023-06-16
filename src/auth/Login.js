@@ -29,7 +29,7 @@ export const Login = ({setToken}) => {
     }
 
     return (
-        <main className="font-body w-screen h-screen">
+        <main className="font-title w-screen h-screen">
             <dialog className="dialog dialog--auth" ref={invalidDialog}>
                 <div>Username or password was not valid.</div>
                 <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
@@ -52,8 +52,8 @@ export const Login = ({setToken}) => {
                 Do not have an account? <Link to="/register">Register here</Link>
             </section>
             </div>
-            <div className=" md:block w-full md:w-1/2">
-                <img src="https://media.cntraveler.com/photos/5a70f9d68af0dc48d25daf9f/16:9/w_4447,h_2501,c_limit/Haedong-Yonggungsa-Temple-GettyImages-874460458.jpg" alt="Beautiful Image" class="object-cover w-full h-[750px]"/>
+            <div className="h-screen w-2/3">
+                <img src="https://media.cntraveler.com/photos/5a70f9d68af0dc48d25daf9f/16:9/w_4447,h_2501,c_limit/Haedong-Yonggungsa-Temple-GettyImages-874460458.jpg" alt="Beautiful Image" className="object-cover w-full h-[800px]"/>
                 </div>
             </div>
         </main>
