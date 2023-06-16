@@ -35,7 +35,7 @@ export const Register = ({setToken}) => {
     }
 
     return (
-        <main className="font-body w-screen h-screen">
+        <main className="font-title w-screen h-screen">
             <div className="flex">
             <div className="w-full md:w-1/2 bg-gray-100 p-8 mx-auto">
                 <h1 className="text-4xl font-bold mb-8">Please Register before continuing</h1>
@@ -70,8 +70,8 @@ export const Register = ({setToken}) => {
                 Already registered? <Link to="/login">Login</Link>
             </section>
             </div>
-            <div className="md:block w-full md:w-1/2">
-                <img src="https://www.thediscoveriesof.com/wp-content/uploads/2020/04/Beautiful-Travel-54.jpg" alt="Beautiful Image" className="object-cover h-screen w-[550px]"/>
+            <div className="md:block w-2/3">
+                <img src="https://www.thediscoveriesof.com/wp-content/uploads/2020/04/Beautiful-Travel-54.jpg" alt="Beautiful Image" className="object-cover h-screen w-full"/>
                 </div>
             </div>
         </main>

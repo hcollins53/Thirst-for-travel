@@ -18,7 +18,8 @@ export const PlanATrip = () => {
             name: trip.name,
             user: travelUser.userId,
             start_date: trip.start_date,
-            end_date: trip.end_date
+            end_date: trip.end_date,
+            image: trip.image
         }
 
        AddNewTrip(newTrip).then(
@@ -38,7 +39,7 @@ export const PlanATrip = () => {
             <form className="text-center py-32 rounded mx-auto">
                 <div className="bg-paleGray w-[600px] mx-auto bg-opacity-60">
                 <h1 className="mb-10 pt-4 text-5xl font-body text-red-800 mx-auto">Create a New Adventure</h1>
-                <fieldset className="mb-10">
+                <fieldset className="font-title font-bold mb-10">
                     <label className="text-2xl"> Trip Name </label>
                     <input type="text" 
                             className="rounded border-b-2"
@@ -52,7 +53,7 @@ export const PlanATrip = () => {
                                 }
                             } />
                 </fieldset>
-                <fieldset className="mb-10">
+                <fieldset className="font-title font-bold mb-10">
                     <div className="items-center flex justify-center">
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -87,27 +88,22 @@ export const PlanATrip = () => {
 
                     
             </fieldset>
-            {/* <fieldset>
-                <div className="form-group">
-                    <label>End Date </label>
-                    <input
-                        required autoFocus
-                        type="date"
-                        className="form-control"
-                        placeholder="End Date"
-                        value={itinerary.endDate}
-                        onChange={
-                            (evt) => {
-                                const copy = {...itinerary}
-                                copy.endDate = evt.target.value
-                                updateItinerary(copy)
-                            }
-                        } />
-                </div>
-            </fieldset> */}
+            <fieldset className="mb-4">
+            <input type="text" 
+                            className="rounded-lg border-b-1 font-title"
+                            placeholder= "image url"
+                            value = {trip.image} 
+                            onChange={
+                                (evt) => {
+                                    const copy = {...trip}
+                                    copy.image = evt.target.value
+                                    updateTrip(copy)
+                                }
+                            } />
+            </fieldset>
             <button 
              onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
-             className="mb-4 mt-2 btn btn-dustyRose btn-md">
+             className="mb-4 mt-2 btn bg-maroonBrown font-title">
                 Start Planning
             </button>
             </div>

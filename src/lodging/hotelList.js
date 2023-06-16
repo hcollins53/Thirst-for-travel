@@ -77,18 +77,16 @@ export const HotelList = () => {
             rating: hotel.rating,
             vicinity: hotel.vicinity,
             lat: hotel?.geometry?.location?.lat,
-            lng: hotel?.geometry?.location?.lng
+            lng: hotel?.geometry?.location?.lng,
+            trip: parseInt(tripId)
         }
 
        AddNewLodging(newLodging).then(
             response => response.json())
             .then(() => {
-                getLodgingByName(hotel.name).then((data) =>{
-                    const singleHotel = data[0]
-                    setHotel(singleHotel)
+                navigate(`/itinerary/${tripId}`)
                 })
-               
-    })}
+    }
     const ChangeMargin = (index) => {
         if ((index + 1) % 2 === 0) {
             return "ml-64";

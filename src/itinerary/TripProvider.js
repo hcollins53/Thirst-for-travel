@@ -102,6 +102,16 @@ const user = JSON.parse(localUser)
         })
                 .then(res => res.json())
     }
+    export const getHotelsByTrip = (tripId) => {
+        const token = user["token"]
+        return fetch(`http://localhost:8000/hotels?trip=${tripId}`, {
+            headers: {
+                "Accept": "application/json",
+               "Authorization": `Token ${token}`
+            }
+        })
+                .then(res => res.json())
+    }
     // export const getActivities = (lat, lng) => {
     //     return fetch(`https://test.api.amadeus.com/v1/shopping/activities?latitude=${lat}&longitude=${lng}&radius=20`, {
     //         headers: {
