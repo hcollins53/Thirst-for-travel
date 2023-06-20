@@ -40,10 +40,10 @@ export const ActivityDetails = () => {
         )
 }
     return <>
-    <article>
+    <article className="font-title bg-midnightBlue">
     
-        <div className="text-2xl font-bold mx-auto flex justify-center">{activity?.result?.name}</div>
-        <div className="flex flex-row">
+        <div className="text-3xl font-title font-bold mx-auto p-3 text-paleGray flex justify-center">{activity?.result?.name}</div>
+        <div className="flex flex-row text-paleGray">
         <div>
             {activity?.result?.reviews.map(review => {
                return<>
@@ -62,7 +62,7 @@ export const ActivityDetails = () => {
         </div>
         
         
-        <section id="map" className="">
+        <section id="map" className="w-full h-full z-0">
         {
             MyMapComponent(lat, lng)
         }

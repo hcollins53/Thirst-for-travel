@@ -31,14 +31,14 @@ export const PlanATrip = () => {
 
     }
     return <>
-            <div className="planning h-screen">
+            <div className="planning h-screen bg-top">
                 {/* <div>
                     <img src="https://loveincorporated.blob.core.windows.net/contentimages/gallery/650e9ba2-eeb9-40ad-af06-180d24416dde-plane-flying-takeoff-shutterstock.jpg"/>
                 </div> */}
                 <div className="bg-opacity-60 h-screen">
-            <form className="text-center py-32 rounded mx-auto">
+            <form className="text-center py-6 rounded mx-auto">
                 <div className="bg-paleGray w-[600px] mx-auto bg-opacity-60">
-                <h1 className="mb-10 pt-4 text-5xl font-body text-red-800 mx-auto">Create a New Adventure</h1>
+                <h1 className="mb-10 pt-36 text-5xl font-body text-red-800 mx-auto">Create a New Adventure</h1>
                 <fieldset className="font-title font-bold mb-10">
                     <label className="text-2xl"> Trip Name </label>
                     <input type="text" 

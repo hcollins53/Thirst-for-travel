@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
-import { useParams, useLocation, useNavigate, Link } from "react-router-dom"
-import { GetGeoCodes, getActivities, getLocationById } from "./TripProvider"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { GetGeoCodes, getActivities, getLocationById, getRestaurants } from "./TripProvider"
 import { AddNewActivity, AddTripActivity, getActivityByName } from "../provider/ActivityProvider"
 
-export const LocationActivities = () => {
+export const FoodList = () => {
     const { locationId } = useParams()
     const navigate = useNavigate()
     const { tripId } = useParams()
     const [location, setLocation] = useState({})
     const [geoCode, setGeoCode] = useState({})
-    const [activities, setActivities] = useState([])
+    const [activities, setRestaurants] = useState([])
     const [activityObj, setActivity] = useState({})
     const[lat, setLat] = useState("")
     const[lng, setLng] = useState("")
@@ -21,9 +21,9 @@ export const LocationActivities = () => {
         if(location.name){
         GetGeoCodes(location.name).then((data)=> {
             setGeoCode(data)
-        getActivities(location.name).then((data) => {
-            setActivities(data)
-        })})
+        // getActivities(location.name).then((data) => {
+        //     setActivities(data)
+        })
         
     }}, [location])
     useEffect(() => {
@@ -32,8 +32,8 @@ export const LocationActivities = () => {
         const lng = geoCode?.hits[0]?.point?.lng
         setLat(lat)
         setLng(lng)
-        getActivities(lat, lng).then((data)=> {
-                    setActivities(data)
+        getRestaurants(lat, lng).then((data)=> {
+                    setRestaurants(data)
                 })}
         
     }, [geoCode])
@@ -80,8 +80,8 @@ export const LocationActivities = () => {
     <div className=" font-title font-bold">
         <div className="">
             <div className="bg-paleGray flex flex-col ">
-    <div className="text-center text-3xl pt-4 pb-4 bg-paleGray">Activities to do {location.name}</div>
-    <Link className="text-center mx-auto justify-center mb-4 under" to={`/food/${locationId}/${tripId}`}>Looking for a place to eat?</Link>
+    <div className="text-center text-3xl pt-4 pb-4 bg-paleGray">Restaurants to do {location.name}</div>
+    <Link className="text-center mx-auto justify-center mb-4 under" to={`/locations/${location.location}/trip/${tripId}`}>Looking for activities to do?</Link>
     </div>
     <div className="mx-auto bg-paleGray">
     
@@ -103,6 +103,5 @@ export const LocationActivities = () => {
         </div>
 </div>
 </div>
-    </>
-}
 
+</>}

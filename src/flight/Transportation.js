@@ -28,12 +28,17 @@ export const TransportationList = () => {
         evt.preventDefault()
         setTripId(evt.target.value)
     }
+    const getTransportation = () => {
+        getTransportationByTripId(tripId).then((data) => {
+            setTransportation(data)
+        })
+    }
     return <>
     <div className="border-b-2 border-midnightBlue shadow-md">
         <img src="https://www.nec.com/en/global/solutions/transportation/images/transportation_header_pc.jpg"/>
     </div>
-    <article className="mx-auto flex items center justify-center flex-col">
-    <div className="text-center mt-6 text-2xl text-maroonBrown">Which Trip do you want view transportation for?</div>
+    <article className="mx-auto font-title flex items center justify-center flex-col font-bold">
+    <div className="text-center text-2xl mt-4 text-maroonBrown">Which Trip do you want view transportation for?</div>
     <select className="w-56 rounded-lg mx-auto m-4" onClick={(evt) => GrabTrip(evt)}>
      <option name= "trip">Choose a Trip</option>
 
@@ -76,7 +81,7 @@ export const TransportationList = () => {
 </table>
     </div>
     <div>
-        <label htmlFor="my-modal-3" className="btn bg-dustyRose w-52 flex justify-center mx-auto">Add new transportation</label>
+        <label htmlFor="my-modal-3" className="btn bg-dustyRose w-52 flex justify-center mx-auto mt-2">Add new transportation</label>
         </div>
     <a className="underline text-right mr-10" href={"https://www.google.com/travel/flights"} target="_blank">Need to search for Flights?</a>
     <input type="checkbox" id="my-modal-3" className="modal-toggle" />
@@ -87,7 +92,7 @@ export const TransportationList = () => {
         <div className=" p-4 shadow-lg">
         <div className="flex flex-col">
             <div>{ 
-            <TransportForm trip={trip} tripId={tripId} />
+            <TransportForm trip={trip} tripId={tripId} getTransportation={getTransportation} />
 }
             </div>
         </div>
