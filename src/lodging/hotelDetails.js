@@ -40,7 +40,7 @@ export const HotelDetails = () => {
         )
 }
     return <>
-    <article className="bg-midnightBlue">
+    <article className="bg-midnightBlue font-title font-bold">
         <div className="text-paleGray p-2">
         <div className="text-2x font-bold mx-auto flex justify-center">{hotel?.result?.name}</div>
         <div className="mx-auto flex justify-center">{hotel?.result?.editorial_summary?.overview}</div>

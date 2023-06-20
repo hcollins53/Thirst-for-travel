@@ -10,6 +10,8 @@ export const Budget = () => {
         const [budget, setBudget] = useState({})
         const [expenses, setExpenses] = useState([])
         const [trip, setTrip] = useState({})
+        const [total, update] = useState(0)
+        
         useEffect(()=> {
             getUserTrips().then((data)=> {
                 setTrips(data)
@@ -23,24 +25,49 @@ export const Budget = () => {
                 const singleBudget = data[0]
                 setBudget(singleBudget)
             })
+            update(0)
             }},[tripId])
         useEffect(() => {
             if(budget?.amount) {
                 getSpendingByBudgetId(budget.id).then((data) => {
                     setExpenses(data)
                 })
+            } else {
+                setExpenses([])
             }
         },[budget])
         const GrabTrip = (evt) => {
             evt.preventDefault()
             setTripId(evt.target.value)
         }
+        
+        useEffect(() => {
+            const totalExpenses = expenses.reduce(
+              (accumulator, expense) => accumulator + expense.amount,
+              0
+            );
+            update(totalExpenses);
+          }, [expenses]);
+          const reGetBudget = () => {
+            getBudgetByTripId(tripId).then((data) => {
+                const singleBudget = data[0]
+                setBudget(singleBudget)
+          })}
+          const getSpending = () => {
+            getSpendingByBudgetId(budget.id).then((data) => {
+                setExpenses(data)
+            })
+          }
+         
+          const remainingAmount = budget?.amount - total;
+          const percentage = total/ budget?.amount * 100
         return <>
-        {/* <div className="border-b-2 border-midnightBlue shadow-md">
-            <img src="https://www.nec.com/en/global/solutions/transportation/images/transportation_header_pc.jpg"/>
-        </div> */}
-        <article className="mx-auto flex items center justify-center flex-col">
-        <div className="text-center mt-6 text-2xl text-maroonBrown">Budget for {trip?.name}</div>
+        <article className="bg-paleGray h-screen">
+        <article className="mx-auto flex items center justify-center flex-col font-title font-bold">
+        {trip.name ? <div className="text-center mt-6 text-2xl mb-4 font-bold text-maroonBrown">Budget for {trip?.name}</div> : ""}
+        { budget?.amount ? <div className="flex flex-col text-center justify-center">
+        <div className="radial-progress mx-auto" style={{"--value":percentage}}>{percentage}% spent</div>
+       </div> : ""}
         <select className="w-56 rounded-lg mx-auto m-4" onClick={(evt) => GrabTrip(evt)}>
          <option name= "trip">Choose a Trip</option>
     
@@ -67,17 +94,36 @@ export const Budget = () => {
         </thead>
         <tbody>
             {
-                expenses.length > 0 ?  expenses.map(expense => {
-                    let total = 0
+                expenses.length > 0 ?  expenses.map((expense, index) => {
+                    const subtotal = expenses
+                    .slice(0, index + 1)
+                    .reduce((acc, curr) => acc + curr.amount, 0)
                     return <> <tr>
                     <th></th>
                     <td className="">{expense.expense}</td>
                     <td>{expense.amount}</td>
-                    <td>{total += expense.amount}</td>
+                    <td>{subtotal}</td>
                     
                   </tr></>
                 }): ""
             }
+    </tbody>
+    <thead>
+          <tr>
+            <th></th>
+            <th>budget</th>
+            <th></th>
+            <th>Amount Left</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                    <th></th>
+                    <td className="">{budget?.amount}</td>
+                    <td></td>
+                    {budget?.amount ? <td>{remainingAmount}</td> : <td></td>}
+                    
+                  </tr>
     </tbody>
     </table>
         </div>
@@ -92,7 +138,7 @@ export const Budget = () => {
             <div className=" p-4 shadow-lg">
             <div className="flex flex-col">
                 <div>{ 
-                <BudgetForm tripId={tripId} />
+                <BudgetForm tripId={tripId} reGetBudget={reGetBudget} />
     }
                 </div>
             </div>
@@ -108,7 +154,7 @@ export const Budget = () => {
             <div className=" p-4 shadow-lg">
             <div className="flex flex-col">
                 <div>{ 
-                <SpendingForm budgetId={budget.id} />}
+                <SpendingForm budgetId={budget?.id} reGetBudget={reGetBudget} getSpending={getSpending} />}
                 </div>
             </div>
             </div>
@@ -116,7 +162,7 @@ export const Budget = () => {
             </div>
             </div>
         </article>
-        
+        </article>
         </>
     }
 

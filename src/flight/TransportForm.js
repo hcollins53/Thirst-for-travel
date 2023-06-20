@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getTripById } from "../itinerary/TripProvider"
 import { AddNewTransportation } from "../provider/TransportationProvider"
 
-export const TransportForm = ({trip, tripId}) => {
+export const TransportForm = ({trip, tripId, getTransportation}) => {
     const navigate = useNavigate()
 
     const [transportation, update] = useState({
@@ -30,7 +30,7 @@ export const TransportForm = ({trip, tripId}) => {
         }
        AddNewTransportation(newTransport)
             .then(() => {
-               navigate("/transportation")
+                getTransportation()
             }) 
     }
     return <>

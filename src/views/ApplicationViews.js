@@ -11,6 +11,7 @@ import { FindFlight } from "../flight/Flight"
 import { TransportForm } from "../flight/TransportForm"
 import { HotelDetails } from "../lodging/hotelDetails"
 import { Budget } from "../budget/BudgetList"
+import { FoodList } from "../itinerary/FoodList"
 
 
 export const ApplicationViews = () => {
@@ -34,6 +35,7 @@ export const ApplicationViews = () => {
               <Route path="/transportForm/:tripId" element={<TransportForm />} />
               <Route path="/hotelDetails/:placeId/:lat/:lng" element={<HotelDetails />} />
               <Route path="/budget" element={<Budget />} />
+              <Route path="/food/:locationId/:tripId" element={<FoodList />} />
             </Route>
         </Routes>
     )

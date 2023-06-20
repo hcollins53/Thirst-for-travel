@@ -39,7 +39,7 @@ export const Itineraries = () => {
     const renderGridItems = () => {
       return itineraries.map((itinerary, index) => (
         <div className="relative">
-             <a class="absolute inset-0 z-10 bg-white text-center flex flex-col items-center justify-center opacity-0 hover:opacity-100 bg-opacity-90 duration-300">
+             <a class="absolute inset-0 z-10 bg-paleGray text-center flex flex-col items-center justify-center opacity-0 hover:opacity-100 bg-opacity-90 duration-300">
              <Link to={`/itinerary/${itinerary.id}`}> <h1  className="tracking-wider" >{itinerary.name}</h1></Link>
       </a>
       <div className="relative">
@@ -64,9 +64,9 @@ export const Itineraries = () => {
     return (
       <>
         {/* <h1>My Itineraries</h1> */}
-        <div className="bg-paleGray h-screen">
+        <div className="bg-midnightBlue h-full font-title"> 
         <div className="flex flex-wrap px-32 items-center justify-center pt-10">{renderGridItems()}</div>
-        <Link className="btn ml" to="/planning">
+        <Link className="btn ml mx-auto flex w-[100px] bg-dustyRose" to="/planning">
           Plan a new trip
         </Link>
         </div>

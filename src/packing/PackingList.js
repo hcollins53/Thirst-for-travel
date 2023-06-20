@@ -52,7 +52,7 @@ export const PackingList = () => {
          })  
     }
     return <>
-    <div className="packing h-screen p-6">
+    <div className="packing h-screen p-6 font-title font-bold">
         <div className="bg-paleGray overlay mx-auto w-3/6 rounded-lg h-auto p-6 border-dustyRose border-4 shadow-lg">
     <div className="mx-auto text-2xl flex justify-center pb-4">Ultimate Packing List</div>
     <select className="rounded-lg ml-6 h-10" onClick={(evt) => GrabTrip(evt)}>

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { AddNewBudget, AddNewExpense } from "../provider/SpendingProvider"
 import { useState } from "react"
 
-export const SpendingForm = ({budgetId}) => {
+export const SpendingForm = ({budgetId, reGetBudget, getSpending}) => {
     const navigate = useNavigate()
 
     const [expense, update] = useState({
@@ -22,6 +22,8 @@ export const SpendingForm = ({budgetId}) => {
        AddNewExpense(newSpending)
             .then(() => {
                update({})
+               reGetBudget()
+               getSpending()
             }) 
     }
     return <>

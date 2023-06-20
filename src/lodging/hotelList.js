@@ -96,8 +96,8 @@ export const HotelList = () => {
     }
     return <>
     <div className={`bg-darkGray h-${screen}`}>
-    <div className="text-paleGray text-3xl text-center pt-10">Explore Hotels and other Lodging</div>
-    <select className="ml-4" onClick={(evt) => GrabTrip(evt)}>
+    <div className="text-paleGray text-3xl text-center font-title font-bold pt-10">Explore Hotels and other Lodging</div>
+    <select className="ml-4 font-title font-bold" onClick={(evt) => GrabTrip(evt)}>
      <option name= "trip">Choose a Trip</option>
 
         {
@@ -111,7 +111,7 @@ export const HotelList = () => {
     {
         trip.name ?
         
-         <select onClick={(evt) => GrabLocation(evt)}>
+         <select className="font-title font-bold" onClick={(evt) => GrabLocation(evt)}>
       <option name= "trip">Choose a Location</option>
  
          {
@@ -127,7 +127,7 @@ export const HotelList = () => {
         (trips.length > 1 && trip?.locations?.length === 0) ? <div className="text-paleGray">
         <Link to={`/itinerary/${tripId}`}>Click here to add a location to your trip</Link></div> : ""
     }
-    <div className="flex">
+    <div className="flex font-title font-bold">
     <div className="w-1/2">
     <div className="text-paleGray mx-auto text-center text-3xl m-2">{location.name}</div>
    <div className="overflow-auto overflow-y-scroll overflow-hidden h-1/6">
